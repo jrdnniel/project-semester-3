@@ -1,0 +1,82 @@
+-- Tabel Stores
+CREATE TABLE stores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    avatar_url VARCHAR(500),
+    description TEXT
+);
+
+-- Tabel Products
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    store_id INT,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    category VARCHAR(100),
+    discount_percentage DECIMAL(5,2) DEFAULT 0,
+    image_url VARCHAR(500),
+    description TEXT,
+    FOREIGN KEY (store_id) REFERENCES stores(id)
+);
+
+-- Tabel Cart
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    quantity INT DEFAULT 1,
+    is_checked BOOLEAN DEFAULT FALSE,
+    note TEXT,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+-- Contoh Data Seeder
+INSERT INTO stores (id, name, avatar_url) VALUES 
+(1,'Elektronik Store', 'https://images.tokopedia.net/img/cache/215-square/shops-1/2021/4/6/11235580/11235580_c8911495-2760-4e11-8404-29f987f4a523.jpg'),
+(2, 'Fashion Store', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2NJkoVprD321B_-sm9y3Mw8fNoxlXwZXPJQ&s'),
+(3, 'Gadget Store', 'https://images.tokopedia.net/img/cache/215-square/shops-1/2018/3/13/357441/357441_d5c89b7b-033f-4389-828a-0914b5953493.jpg'),
+(4,'DIY Store', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvuTQdMm9n0HlwrANhKlybOHm7h0pGvjjxyw&s'),
+(5, 'Clothing Store', 'https://www.shutterstock.com/image-illustration/store-facade-large-storefronts-wellilluminated-600nw-2301241861.jpg'),
+(6, 'Laptop Store', 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/laptop-store-logo-design-template-b8cb62247e5e2338cd49c7961aa59c08_screen.jpg?ts=1603723247'),
+(7,'Perabot Store', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7b8lIAH62j9CEoN07SzAK-cmU5bdWTBpkCw&s'),
+(8, 'Beauty Store', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz9aJboMzzLqwwccDbtOyXG2U6T71Ka3dthA&s'),
+(9, 'Man Store', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRHpUklOPVCkunv43g-0EPr1nqHW6Va53-aw&s'),
+(10, 'Woman Store', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7lVPzoT_cUyFovLWzXP0ZCeGwTIJDqFdsNDPuBuGExPov6k9mY0CyFSD3Zz8W_2735xk&usqp=CAU');
+
+
+INSERT INTO products (id, store_id, name, price, category, discount_percentage, image_url, description) VALUES 
+(1, 1,'Kulkas', 5000000, 'Elektronik', 10, 'https://www.lg.com/content/dam/channel/wcms/id/images/kulkas/gn-b202sqib_adspein_eain_id_c/gallery/DZ-11.jpg', 'Kulkas dengan teknologi terbaru'),
+(2, 1,'Tv', 5000000, 'Elektronik', 15, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu_nSGZ8-p6sWxR2RyZ5aLo10_bmVktJ5JqQ&s', 'TV untuk pengalaman lebih nyata'),
+(3, 1,'Kipas Angin', 100000, 'Elektronik', 20, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZcD_IXGug9eP3f1nzopj_jvBIJRkaf3m-HA&s', 'Kipas berkualitas premium'),
+(4, 2,'Baju', 50000, 'Fashion', 10, 'https://contents.mediadecathlon.com/p2157319/k$45a8143f29ae498e05be9c1588d95135/kaos-running-dry-fit-baju-lari-pria-breathable-hitam-decathlon-8488034.jpg?f=1920x0&format=auto', 'Baju dengan bahan yang adem'),
+(5, 2,'Celana', 60000, 'Fashion', 10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFvWzknkCSAiyEVhJe9vGjcvTTP4gJA7Bdhg&s', 'Celana dengan bahan yang adem'),
+(6, 2,'Rok', 60000, 'Fashion', 15, 'https://images.tokopedia.net/img/cache/700/VqbcmM/2022/8/23/62aca94e-7baf-432d-bd13-d5177896b51e.jpg', 'Rok dengan bahan yang adem'),
+(7, 3,'Vivo', 1500000, 'Gadget', 20, 'https://indodana-web.imgix.net/assets/vivo-v40-platinum-silver-thumbnail.png?auto=compress', 'Handphone Gaming'),
+(8, 3,'Oppo', 5000000, 'Gadget', 10, 'https://cdn.oppo.co.id/media/catalog/product/h/p/hp-a3-pro-purple-oppo-a3-pro-5g-cph2639-europe-256gb-8gb-moonlight-purple-id_2.jpg', 'Smartphone dengan teknologi terbaru'),
+(9, 3,'Samsung', 5000000, 'Gadget', 10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlywLRnLJLIxqIPFUNpSpr8MsdQBDKCC01aQ&s', 'Handphone Gaming dan Camera Oke'),
+(10, 4,'Palu', 50000, 'DIY', 15, 'https://images.tokopedia.net/img/cache/500-square/product-1/2019/1/15/13800922/13800922_6aee402d-dd5d-400a-bc58-a7113323dc1b_1182_1182.jpg', 'Palu untuk produktivitas'),
+(11, 4,'Paku', 5000, 'DIY', 20, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq8lErip1JLLZ43BcnHlmKkp7sjSinz0cbCQ&s', 'Paku berkualitas premium'),
+(12, 4,'Seng', 150000, 'DIY', 10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHB4MASqHeTsBIuY7vmJferWrhSndsf_8Scg&s2', 'Seng dengan tingkat ketahanan lebih lama'),
+(13, 5,'Dress', 500000, 'Fashion', 10, 'https://images.tokopedia.net/img/cache/700/hDjmkQ/2023/7/3/124a546d-84f9-47d0-8297-6798d5aa641f.jpg', 'Kain dengan bahan yang di import langsung dari Binjai'),
+(14, 5,'Kemeja', 500000, 'Fashion', 15, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjGjJRRH_KZ5a5YqAmhg0kMS6Bge1WlEg9Q&s', 'Kain dengan bahan yang di import langsung dari Jermal'),
+(15, 5,'Kaos', 100000, 'Fashion', 20, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm2ANY4DbSsrIvXBSVsRlbh3RBeHozIjimCg&s', 'Kain dengan bahan yang di import langsung dari Sibolga'),
+(16, 6,'Acer', 5000000, 'Laptop', 10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Q6yJYJgFdYkgAXRbdzJoqEks4aAiJFJJew&s', 'Laptop dengan teknologi terbaru'),
+(17, 6,'Asus', 5000000, 'Laptop', 10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFjru5bU0Ql75Y6ZaYCXmE3Uuou39exVTdfA&s', 'Laptop dengan teknologi terbaru'),
+(18, 6,'Lenovo', 5000000, 'Laptop', 15, 'https://p4-ofp.static.pub//fes/cms/2024/05/17/jyzcghmbhhk6891sb7sl03ckaybmge004572.png', 'Laptop untuk produktivitas'),
+(19, 7,'Meja', 200000, 'Perabotan', 20, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkFvhNy9NfnIw6howCH8pVq9EQ68tfuPelaA&s', 'Kualitas Kayu Mahogani Langkah'),
+(20, 7,'Pintu', 300000, 'Perabotan', 10, 'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2021/6/17/82f102c4-c11a-4659-8ef4-b2768b24490e.jpg', 'Kualitas Kayu Mahogani Langkah'),
+(21, 7,'Kursi', 150000, 'Perabotan', 10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToAsZI_yvlx3oDs_GChL9wtnmaKFVadl3G0w&s', 'Kualitas Kayu Mahogani Langkah'),
+(22, 8,'Bedak', 12000, 'Woman', 15, 'https://images.tokopedia.net/img/cache/700/VqbcmM/2022/7/31/1b584cc7-aa5f-42af-94bb-54c84b5c55a7.jpg', 'Cocok untuk gen Z'),
+(23, 8,'Make Up', 100000, 'Woman', 20, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2G6MGc5_0P1c08hQ1XlkIpObq5EhtzRyxlg&s', 'Cocok untuk gen Z'),
+(24, 8,'Skinker', 700000, 'Woman', 10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgr289FL_Zx7njmXQNDrzNExAoVAGhktdz5g&s', 'Cocok untuk gen Z'),
+(25, 9,'Hodie', 100000, 'Fashion', 10, 'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/4/19/17d10052-d934-468d-b7f5-1628e13875e6.jpg', 'Fashion Untuk Chill guy'),
+(26, 9,'Jaket', 110000, 'Fashion', 15, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUL8vT5kG5AkoFj3i-R0E4fP5Y2y7EuRW3Ng&s', 'Fashion Untuk Chill guy'),
+(27, 9,'Jas', 200000, 'Fashion', 20, 'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/14/e19dfcd6-5e76-452a-8699-97496522358e.jpg', 'Fashion Untuk Chill guy'),
+(28, 10,'Kalung', 5000000, 'Perhiasan', 10, 'https://down-id.img.susercontent.com/file/sg-11134201-7rblz-lnba48uqkzhsda', 'Perhiasan Mewah untuk Pamer ke Publik'),
+(29, 10,'Gelang', 5000000, 'Perhiasan', 10, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0jNEiE87_fOPKveJy-CZ2NBMp7lmc8egfeQ&s', 'Perhiasan Mewah untuk Pamer ke Publik'),
+(30, 10,'Cincin', 12000000, 'Perhiasan', 15, 'https://api.thepalacejeweler.com/upload/article/1720506192-WhatsApp%20Image%202024-06-19%20at%2017.28.47.jpeg', 'Perhiasan Mewah untuk Pamer ke Publik');
+
+SELECT p.* 
+FROM products p
+WHERE p.store_id = 1;
+
+DESCRIBE products;
